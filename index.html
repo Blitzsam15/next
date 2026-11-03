@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5efe5">
+  <meta name="description" content="Gather around the table at Olive & Ember: comforting seasonal plates, something good in your glass, and always room for one more.">
+  <title>Olive &amp; Ember — A little more around the table</title>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
+
+:root {
+  color-scheme: light;
+  --cream: #f5efe5;
+  --paper: #fcf8f0;
+  --ink: #26352b;
+  --muted: #736f62;
+  --olive: #65704a;
+  --rust: #b75c3c;
+  --serif: "DM Serif Display", Georgia, serif;
+  --sans: "DM Sans", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+
+.site-header {
+  align-items: center;
+  background: var(--cream);
+  display: flex;
+  height: 82px;
+  justify-content: space-between;
+  padding: 0 7.1%;
+  position: relative;
+  z-index: 5;
+}
+.wordmark { align-items: center; display: inline-flex; gap: 11px; }
+.wordmark-mark { color: var(--rust); font: italic 32px/.8 var(--serif); letter-spacing: -5px; }
+.wordmark-mark span { color: var(--olive); font-size: 19px; }
+.wordmark-name { font: 17px var(--serif); letter-spacing: .02em; }
+.wordmark-name i { color: var(--rust); }
+.site-nav { align-items: center; display: flex; gap: clamp(24px, 3.3vw, 52px); font-size: 12px; }
+.site-nav > a { transition: color .2s ease; }
+.site-nav > a:hover { color: var(--rust); }
+.nav-toggle { display: none; }
+
+.hero { background: #27382f; color: #fffaf0; }
+.hero-scene { height: min(690px, 75vw); min-height: 570px; overflow: hidden; perspective: 1300px; position: relative; }
+.hero-photo, .hero-photo-shade { inset: 0; position: absolute; }
+.hero-photo {
+  background-image: url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2200&q=88");
+  background-position: center 54%;
+  background-size: cover;
+  transform: scale(1.055) translateZ(-30px);
+  transition: transform 1.1s cubic-bezier(.2,.7,.2,1), background-position .9s ease;
+  will-change: transform;
+}
+.hero-photo.is-turned { background-position: 63% 48%; transform: scale(1.12) rotateY(-5deg) rotateX(1deg) translateZ(0); }
+.hero-photo-shade { background: linear-gradient(90deg, rgba(21,34,27,.82) 0%, rgba(24,36,29,.62) 39%, rgba(22,31,26,.1) 78%), linear-gradient(0deg, rgba(24,34,29,.32), transparent 35%); }
+.hero-copy { left: 12%; max-width: 560px; position: absolute; top: 50%; transform: translateY(-47%); }
+.eyebrow { align-items: center; color: var(--olive); display: flex; font-size: 10px; font-weight: 700; gap: 10px; letter-spacing: .16em; margin: 0 0 22px; text-transform: uppercase; }
+.hero .eyebrow { color: #e8c6a9; }
+.eyebrow-line { background: var(--rust); display: inline-block; height: 1px; width: 25px; }
+h1, h2, h3, p { margin-top: 0; }
+.hero h1 { font: 400 clamp(58px, 7vw, 91px)/.99 var(--serif); letter-spacing: -.035em; margin: 0 0 23px; }
+h1 em, h2 em { color: #dca07c; font-weight: 400; }
+.hero-description { color: rgba(255,250,240,.82); font-size: 14px; line-height: 1.85; margin: 0 0 31px; max-width: 400px; }
+.hero-stamp { align-items: center; border: 1px solid rgba(255,250,240,.7); border-radius: 50%; color: #fff8e9; display: flex; flex-direction: column; font-size: 8px; gap: 6px; height: 120px; justify-content: center; letter-spacing: .15em; position: absolute; right: 12%; top: 17%; transform: rotate(12deg); width: 120px; }
+.stamp-star { color: #e4ad85; font-size: 22px; }
+.hero-note { bottom: 33px; color: rgba(255,250,240,.75); font: italic 13px var(--serif); left: 12%; margin: 0; position: absolute; }
+.hero-bottom { align-items: center; color: #d8d1c3; display: flex; font-size: 8px; justify-content: space-between; letter-spacing: .13em; min-height: 51px; padding: 0 7.1%; }
+.hero-bottom a { color: #fff8e9; letter-spacing: .02em; text-transform: none; }
+.hero-bottom a span { color: #dca07c; margin-left: 8px; }
+
+.section-wrap { margin: 0 auto; max-width: 1200px; padding-left: 7%; padding-right: 7%; }
+.welcome { align-items: center; display: grid; gap: 11%; grid-template-columns: 1fr 1fr; padding-bottom: 125px; padding-top: 125px; }
+.welcome-art { height: 450px; position: relative; }
+.welcome-photo { background: url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=85") center/cover; height: 100%; width: 88%; }
+.welcome-card { align-items: center; background: var(--olive); box-shadow: 0 15px 40px rgba(38,53,43,.18); color: var(--paper); display: flex; flex-direction: column; font: 600 39px/.75 "Caveat", cursive; height: 155px; justify-content: center; position: absolute; right: 0; top: 56%; transform: rotate(3deg); width: 155px; }
+.card-flourish { color: #e4ad85; font: 17px var(--sans); padding: 8px 0; }
+.photo-caption { bottom: -27px; color: var(--muted); font: italic 11px var(--serif); left: 0; position: absolute; }
+.welcome-copy { max-width: 450px; }
+.welcome h2, .section-heading h2, .visit-content h2 { font: 400 clamp(42px, 5vw, 62px)/1.07 var(--serif); letter-spacing: -.025em; margin: 0 0 23px; }
+.welcome h2 em, .section-heading h2 em { color: var(--rust); }
+.welcome-copy > p:not(.eyebrow) { color: #69685e; font-size: 13px; line-height: 1.95; margin-bottom: 14px; }
+.text-link { border-bottom: 1px solid #aeb19b; display: inline-block; font-size: 11px; margin-top: 11px; padding-bottom: 8px; }
+
+.menu-section { background: #ebe6da; padding: 94px 0 90px; }
+.section-heading { align-items: end; display: flex; justify-content: space-between; margin-bottom: 43px; }
+.section-heading .eyebrow { margin-bottom: 16px; }
+.section-heading h2 { font-size: clamp(42px, 5vw, 59px); margin: 0; }
+.section-heading > p { color: var(--muted); font: italic 15px/1.6 var(--serif); margin: 0 2% 5px 25px; max-width: 280px; }
+.menu-grid { align-items: start; display: grid; gap: 27px; grid-template-columns: repeat(3, 1fr); }
+.menu-card { min-width: 0; }
+.menu-card-raised { margin-top: 35px; }
+.menu-image { background-position: center; background-size: cover; height: clamp(190px, 23vw, 290px); transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.menu-card:hover .menu-image { transform: scale(1.025); }
+.menu-image-one { background-image: url("https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=850&q=85"); }
+.menu-image-two { background-image: url("https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=850&q=85"); }
+.menu-image-three { background-image: url("https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=850&q=85"); }
+.menu-card-info { align-items: flex-start; display: flex; gap: 10px; justify-content: space-between; padding-top: 17px; }
+.menu-card h3 { font: 400 20px var(--serif); margin: 0 0 5px; }
+.menu-card-info p { color: var(--muted); font-size: 10px; line-height: 1.6; margin: 0; }
+.price { color: var(--rust); font: 18px var(--serif); padding-top: 2px; }
+.dish-label { color: #848271; display: inline-block; font-size: 8px; letter-spacing: .11em; margin-top: 17px; text-transform: uppercase; }
+.menu-footnote { color: var(--muted); font: italic 12px var(--serif); margin: 48px 0 0; text-align: center; }
+
+.visit-section { align-items: center; background: #d9d8c6; display: grid; gap: clamp(22px, 2.8vw, 40px); grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr); min-height: 545px; padding-right: 7%; }
+.visit-photo { align-self: stretch; background: linear-gradient(0deg, rgba(28,38,28,.08), rgba(28,38,28,.08)), url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85") center/cover; min-height: 545px; }
+.visit-content { max-width: 480px; padding: 70px 0; }
+.visit-content h2 { font-size: clamp(48px, 5.3vw, 66px); margin-bottom: 19px; }
+.visit-content h2 em { color: var(--rust); }
+.visit-content > p:not(.eyebrow) { color: #69685e; font-size: 12px; line-height: 1.9; margin-bottom: 0; max-width: 340px; }
+.hours-card { align-self: center; border-left: 1px solid rgba(38,53,43,.17); padding: 25px 0 25px 25px; position: relative; width: auto; }
+.hours-icon { color: var(--rust); font-size: 20px; position: absolute; right: 0; top: 20px; }
+.hours-card .eyebrow { font-size: 8px; margin-bottom: 8px; }
+.hours-card h3 { font: 26px var(--serif); margin-bottom: 19px; }
+.hours-card dl { margin: 0; }
+.hours-card dl div { border-top: 1px solid #e8e1d6; display: flex; font-size: 9px; justify-content: space-between; padding: 10px 0; }
+.hours-card dt { color: #68675d; }
+.hours-card dd { font-weight: 700; margin: 0; }
+.hours-aside { color: var(--muted); font: italic 11px/1.55 var(--serif); margin: 14px 0 0; }
+
+.site-footer { background: #28382f; color: #f5efe5; padding: 60px 7.1% 0; }
+.footer-main { display: flex; justify-content: space-between; padding-bottom: 53px; }
+.footer-wordmark .wordmark-name { font-size: 19px; }
+.footer-brand > p { color: #cbc9b9; font: italic 13px/1.6 var(--serif); margin: 18px 0 0 42px; }
+.footer-details { display: grid; gap: clamp(26px, 5vw, 75px); grid-template-columns: repeat(3, auto); }
+.footer-label { color: #d9a080; font-size: 8px; font-weight: 700; letter-spacing: .15em; margin: 3px 0 15px; text-transform: uppercase; }
+.footer-details > div > a { color: #eeeadf; display: block; font-size: 10px; line-height: 1.9; }
+.footer-bottom { align-items: center; border-top: 1px solid rgba(245,239,229,.19); color: #c4c5b7; display: flex; font-size: 8px; justify-content: space-between; letter-spacing: .06em; min-height: 54px; }
+.footer-bottom a { color: #f5efe5; letter-spacing: 0; }
+
+@media (min-width: 1400px) {
+  .hero-scene { height: 710px; }
+}
+
+@media (max-width: 900px) {
+  .site-header { padding: 0 5%; }
+  .site-nav { gap: 21px; }
+  .hero-copy { left: 8%; }
+  .hero-note { left: 8%; }
+  .hero-bottom { padding: 0 5%; }
+  .welcome { gap: 7%; padding-bottom: 95px; padding-top: 95px; }
+  .welcome-art { height: 390px; }
+  .welcome-card { height: 125px; width: 125px; }
+  .section-wrap { padding-left: 5%; padding-right: 5%; }
+  .menu-grid { gap: 17px; }
+  .menu-card h3 { font-size: 18px; }
+  .visit-section { gap: 20px; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr) minmax(0, .95fr); padding-right: 5%; }
+  .visit-content { padding: 60px 0; }
+  .visit-content h2 { font-size: clamp(38px, 5vw, 48px); }
+  .hours-card { padding: 25px 0 25px 18px; }
+  .footer-details { gap: 26px; }
+}
+
+@media (max-width: 640px) {
+  .site-header { height: 70px; padding: 0 6%; }
+  .wordmark-mark { font-size: 29px; }
+  .wordmark-name { font-size: 16px; }
+  .nav-toggle { align-items: center; background: none; border: 0; cursor: pointer; display: flex; flex-direction: column; gap: 6px; padding: 10px 0 10px 10px; }
+  .nav-toggle span { background: var(--ink); height: 1px; transition: transform .2s; width: 24px; }
+  .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+  .site-nav { align-items: stretch; background: var(--cream); box-shadow: 0 15px 18px rgba(38,53,43,.1); display: none; flex-direction: column; gap: 0; left: 0; padding: 8px 6% 20px; position: absolute; right: 0; top: 70px; }
+  .site-nav.is-open { display: flex; }
+  .site-nav > a { border-top: 1px solid #e3dccf; padding: 15px 0; }
+  .hero-scene { height: 680px; min-height: 0; }
+  .hero-photo { background-position: 58% center; }
+  .hero-photo.is-turned { background-position: 68% center; transform: scale(1.1) rotateY(-3deg); }
+  .hero-photo-shade { background: linear-gradient(90deg, rgba(21,34,27,.76), rgba(24,36,29,.36) 100%), linear-gradient(0deg, rgba(24,34,29,.45), transparent 53%); }
+  .hero-copy { left: 7%; max-width: 88%; top: 47%; }
+  .hero h1 { font-size: clamp(57px, 13vw, 77px); }
+  .hero-description { font-size: 13px; max-width: 335px; }
+  .hero-stamp { height: 83px; right: 8%; top: 7%; width: 83px; }
+  .hero-stamp span:not(.stamp-star) { font-size: 6px; }
+  .stamp-star { font-size: 17px; }
+  .hero-note { bottom: 31px; left: 7%; }
+  .hero-bottom { font-size: 7px; min-height: 45px; padding: 0 6%; }
+  .hero-bottom > span:last-child { display: none; }
+  .welcome { gap: 58px; grid-template-columns: 1fr; padding-bottom: 90px; padding-top: 78px; }
+  .welcome-art { height: 330px; margin-right: 12px; }
+  .welcome-photo { width: 89%; }
+  .welcome-card { height: 120px; right: -5px; width: 120px; }
+  .welcome-copy { max-width: 480px; }
+  .welcome h2, .section-heading h2 { font-size: 47px; }
+  .menu-section { padding: 73px 0 65px; }
+  .section-heading { align-items: flex-start; flex-direction: column; gap: 16px; margin-bottom: 30px; }
+  .section-heading > p { margin: 0; }
+  .menu-grid { gap: 29px; grid-template-columns: 1fr; }
+  .menu-card-raised { margin-top: 0; }
+  .menu-image { height: 64vw; max-height: 340px; }
+  .menu-card h3 { font-size: 21px; }
+  .menu-footnote { line-height: 1.6; margin-top: 34px; }
+  .visit-section { gap: 0; grid-template-columns: 1fr; padding-right: 0; }
+  .visit-photo { min-height: 310px; }
+  .visit-content { max-width: none; padding: 54px 7% 24px; }
+  .visit-content h2 { font-size: 57px; }
+  .hours-card { border-left: 0; border-top: 1px solid rgba(38,53,43,.17); margin: 0 7% 32px; padding: 24px 0 0; }
+  .hours-card h3 { font-size: 23px; }
+  .hours-card dl div { font-size: 9px; }
+  .site-footer { padding: 45px 7% 0; }
+  .footer-main { flex-direction: column; gap: 35px; padding-bottom: 34px; }
+  .footer-details { gap: 25px 18px; grid-template-columns: 1fr 1.5fr; }
+  .footer-details > div:last-child { grid-column: 1 / -1; }
+  .footer-bottom { align-items: flex-start; flex-wrap: wrap; gap: 10px 20px; padding: 15px 0; }
+  .footer-bottom > span:last-child { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="Olive and Ember home">
+      <span class="wordmark-mark" aria-hidden="true">o<span>&amp;</span>e</span>
+      <span class="wordmark-name">olive <i>&amp;</i> ember</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+      <span></span><span></span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+      <a href="#story">Our table</a>
+      <a href="#menu">The good stuff</a>
+      <a href="#visit">Find us</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-scene">
+        <div class="hero-photo" aria-hidden="true"></div>
+        <div class="hero-photo-shade" aria-hidden="true"></div>
+        <div class="hero-stamp" aria-hidden="true">
+          <span>GOOD FOOD</span><span class="stamp-star">✳</span><span>GOOD COMPANY</span>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> A neighborhood kind of place</p>
+          <h1 id="hero-title">A little more<br>around <em>the table.</em></h1>
+          <p class="hero-description">Come for the slow-roasted things. Stay for the second glass, the last little bite, and the feeling that you belong here.</p>
+        </div>
+        <p class="hero-note">Made with love, served with a little fire.</p>
+      </div>
+      <div class="hero-bottom">
+        <span>SEASONAL PLATES · LOCAL POUR</span>
+        <a href="#story">A note from our kitchen</a>
+        <span>EST. WHENEVER YOU’RE HUNGRY</span>
+      </div>
+    </section>
+
+    <section class="welcome section-wrap" id="story" aria-labelledby="welcome-title">
+      <div class="welcome-art" aria-label="A table set with fresh bread and olive oil">
+        <div class="welcome-photo"></div>
+        <div class="welcome-card" aria-hidden="true">
+          <span>Gather</span>
+          <span class="card-flourish">✳</span>
+          <span>often.</span>
+        </div>
+        <span class="photo-caption">A little something for the middle of the table</span>
+      </div>
+      <div class="welcome-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> You made it. We’re glad.</p>
+        <h2 id="welcome-title">The best nights<br>start with <em>“one more.”</em></h2>
+        <p>One more plate for the middle. One more story before you go. One more person squeezing in beside you. That’s the whole idea at Olive &amp; Ember.</p>
+        <p>We cook the kind of food that brings everybody closer: vegetables at their peak, comfort by the spoonful, and a little something warm from the oven.</p>
+        <a class="text-link" href="#visit">Come as you are</a>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu" aria-labelledby="menu-title">
+      <div class="section-wrap">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span class="eyebrow-line"></span> Made to pass around</p>
+            <h2 id="menu-title">A few <em>favorites.</em></h2>
+          </div>
+          <p>Seasonal, generous, and best enjoyed with the people you like most.</p>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <div class="menu-image menu-image-one" role="img" aria-label="Roasted carrots with herbs and creamy yogurt"></div>
+            <div class="menu-card-info">
+              <div><h3>Carrots, all dressed up</h3><p>Whipped feta · hot honey · crunchy seeds</p></div>
+              <span class="price">$14</span>
+            </div>
+            <span class="dish-label">A little sweet · a little heat</span>
+          </article>
+          <article class="menu-card menu-card-raised">
+            <div class="menu-image menu-image-two" role="img" aria-label="A bowl of handmade pasta with tomato sauce and basil"></div>
+            <div class="menu-card-info">
+              <div><h3>The Sunday kind of pasta</h3><p>Slow tomato · parmesan · fresh basil</p></div>
+              <span class="price">$24</span>
+            </div>
+            <span class="dish-label">Made fresh, every day</span>
+          </article>
+          <article class="menu-card">
+            <div class="menu-image menu-image-three" role="img" aria-label="Warm chocolate cake with melting chocolate and powdered sugar"></div>
+            <div class="menu-card-info">
+              <div><h3>Just one more bite</h3><p>Warm chocolate cake · vanilla cream</p></div>
+              <span class="price">$12</span>
+            </div>
+            <span class="dish-label">Save a little room</span>
+          </article>
+        </div>
+        <p class="menu-footnote">The menu follows the seasons. These are just a few things to get you dreaming.</p>
+      </div>
+    </section>
+
+    <section class="visit-section" id="visit" aria-labelledby="visit-title">
+      <div class="visit-photo" role="img" aria-label="A candlelit dinner table ready to welcome guests"></div>
+      <div class="visit-content">
+        <p class="eyebrow"><span class="eyebrow-line"></span> Your seat is waiting</p>
+        <h2 id="visit-title">Come hungry.<br><em>Leave happy.</em></h2>
+        <p>Walk-ins, special occasions, long lunches, no particular reason. There’s always room at our table.</p>
+      </div>
+      <div class="hours-card">
+        <span class="hours-icon" aria-hidden="true">✳</span>
+        <p class="eyebrow">Come on in</p>
+        <h3>When we’re here</h3>
+        <dl>
+          <div><dt>Monday – Thursday</dt><dd>4 – 9 pm</dd></div>
+          <div><dt>Friday – Saturday</dt><dd>12 – 10 pm</dd></div>
+          <div><dt>Sunday</dt><dd>12 – 8 pm</dd></div>
+        </dl>
+        <p class="hours-aside">The kitchen’s always happy<br>to see you.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a class="wordmark footer-wordmark" href="#home">
+          <span class="wordmark-mark" aria-hidden="true">o<span>&amp;</span>e</span>
+          <span class="wordmark-name">olive <i>&amp;</i> ember</span>
+        </a>
+        <p>A neighborhood table<br>with room for one more.</p>
+      </div>
+      <div class="footer-details">
+        <div>
+          <p class="footer-label">Find your way</p>
+          <a href="https://maps.google.com/?q=123+Maple+Street+Exampleville">123 Maple Street<br>Exampleville, EX 00000</a>
+        </div>
+        <div>
+          <p class="footer-label">Say hello</p>
+          <a href="tel:+15550123">(555) 555-0123</a>
+          <a href="mailto:hello@oliveandember.example.com">hello@oliveandember.example.com</a>
+        </div>
+        <div>
+          <p class="footer-label">Keep in touch</p>
+          <a href="https://instagram.com/">Instagram</a>
+          <a href="https://facebook.com/">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Olive &amp; Ember. Made for sharing.</span>
+      <a href="#home">Back to the top</a>
+      <span>GOOD THINGS HAPPEN AROUND THE TABLE</span>
+    </div>
+  </footer>
+  <script>
+const navToggle = document.querySelector(".nav-toggle");
+const siteNav = document.querySelector("#site-nav");
+
+navToggle.addEventListener("click", () => {
+  const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+  navToggle.setAttribute("aria-expanded", String(!isOpen));
+  navToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+  siteNav.classList.toggle("is-open", !isOpen);
+});
+
+siteNav.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Open navigation");
+    siteNav.classList.remove("is-open");
+  });
+});
+
+const scene = document.querySelector(".hero-photo");
+const heroScene = document.querySelector(".hero-scene");
+const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+if (!reduceMotion.matches) {
+  window.setInterval(() => {
+    if (!document.hidden) {
+      scene.classList.toggle("is-turned");
+    }
+  }, 6500);
+}
+
+if (canHover.matches && !reduceMotion.matches) {
+  heroScene.addEventListener("pointermove", (event) => {
+    const bounds = heroScene.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    if (!scene.classList.contains("is-turned")) {
+      scene.style.transform = `translate3d(${x * -9}px, ${y * -7}px, 0) scale(1.015)`;
+    }
+  });
+
+  heroScene.addEventListener("pointerleave", () => {
+    scene.style.transform = "";
+  });
+}
+  </script>
+</body>
+</html>
